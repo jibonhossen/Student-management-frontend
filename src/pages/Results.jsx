@@ -441,19 +441,7 @@ function ResultsPage() {
               />
             </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-700" htmlFor="result-grade">
-                Grade
-              </label>
-              <input
-                id="result-grade"
-                name="grade"
-                value={form.grade}
-                onChange={handleChange}
-                placeholder="e.g., A"
-                className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/40"
-              />
-            </div>
+     
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-slate-700" htmlFor="result-comments">
