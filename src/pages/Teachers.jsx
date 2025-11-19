@@ -4,6 +4,7 @@ import LoadingState from '../components/LoadingState.jsx';
 import ErrorState from '../components/ErrorState.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 import { apiClient, endpoints, withMessage } from '../services/apiClient.js';
+import { hashPassword } from '../utils/hashPassword.js';
 
 const INITIAL_FORM = {
   name: '',
@@ -11,19 +12,6 @@ const INITIAL_FORM = {
   password: '',
   id: '',
 };
-
-async function hashPassword(value) {
-  if (!window.crypto?.subtle) {
-    return value;
-  }
-
-  const encoder = new TextEncoder();
-  const data = encoder.encode(value);
-  const digest = await window.crypto.subtle.digest('SHA-256', data);
-  return Array.from(new Uint8Array(digest))
-    .map(byte => byte.toString(16).padStart(2, '0'))
-    .join('');
-}
 
 function TeachersPage() {
   const [teachers, setTeachers] = useState([]);

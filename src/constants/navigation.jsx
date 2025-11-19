@@ -99,6 +99,15 @@ const PublicIcon = createIcon({
   ],
 });
 
+const TeacherPortalIcon = createIcon({
+  paths: [
+    'M4.5 6.75h15v10.5h-15z',
+    'M8.25 6.75V5.25A2.25 2.25 0 0110.5 3h3a2.25 2.25 0 012.25 2.25v1.5',
+    'M9 12h6',
+    'M9 15h4.5',
+  ],
+});
+
 export const navigationItems = [
   {
     label: 'Dashboard',
@@ -147,6 +156,12 @@ export const navigationItems = [
     description: 'Record and update exam results',
     to: '/results',
     icon: ResultsIcon,
+  },
+  {
+    label: 'Teacher Portal',
+    description: 'Teacher login & result submission',
+    to: '/teacher-portal',
+    icon: TeacherPortalIcon,
   },
   {
     label: 'Public Results',

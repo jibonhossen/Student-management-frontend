@@ -136,6 +136,7 @@ export const endpoints = {
     create: `${API_POST_PREFIX}/add-teacher-assignment`,
   },
   teacher: {
+    login: `/api/v1/mobile/login`,
     classes: `${API_GET_PREFIX}/catt`,
     subjects: `${API_GET_PREFIX}/soat`,
     students: `${API_GET_PREFIX}/students-of-a-class`,

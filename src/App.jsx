@@ -9,6 +9,7 @@ import ExamsPage from './pages/Exams.jsx';
 import AssignmentsPage from './pages/Assignments.jsx';
 import ResultsPage from './pages/Results.jsx';
 import PublicResultsPage from './pages/PublicResults.jsx';
+import TeacherPortalPage from './pages/TeacherPortal.jsx';
 import NotFoundPage from './pages/NotFound.jsx';
 
 export function App() {
@@ -25,6 +26,7 @@ export function App() {
         <Route path="/assignments" element={<AssignmentsPage />} />
         <Route path="/results" element={<ResultsPage />} />
         <Route path="/public-results" element={<PublicResultsPage />} />
+        <Route path="/teacher-portal" element={<TeacherPortalPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
