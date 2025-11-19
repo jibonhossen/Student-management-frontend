@@ -18,7 +18,6 @@ const RESULT_INITIAL = {
   roll_number: '',
   exam_id: '',
   marks: '',
-  comments: '',
 };
 
 const unwrap = payload => {
@@ -112,7 +111,6 @@ function TeacherPortalPage() {
         student_id: '',
         roll_number: '',
         marks: '',
-        comments: '',
       }));
     } catch (error) {
       setDependentError(error.message || 'Unable to load teacher assignments.');
@@ -266,7 +264,6 @@ function TeacherPortalPage() {
         exam_id: form.exam_id,
         subject_id: form.subject_id,
         marks: marksValue,
-        comments: form.comments.trim() || null,
         teacher_id: teacher.id,
       };
       const response = await apiClient.post(endpoints.results.upsert, { body: payload });
@@ -493,7 +490,7 @@ function TeacherPortalPage() {
                   />
                 </div>
 
-              
+
               </div>
 
               {resultFeedback ? (
@@ -517,7 +514,6 @@ function TeacherPortalPage() {
                       ...current,
                       roll_number: '',
                       marks: '',
-                      comments: '',
                     }))
                   }
                   className="inline-flex flex-1 items-center justify-center rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-sm transition hover:bg-slate-100 focus:outline-none focus-visible:ring focus-visible:ring-indigo-500/60"

@@ -11,8 +11,8 @@ const INITIAL_FORM = {
   subject_id: '',
   student_id: '',
   marks: '',
+  marks: '',
   grade: '',
-  comments: '',
 };
 
 function ResultsPage() {
@@ -238,7 +238,6 @@ function ResultsPage() {
         subject_id: form.subject_id,
         marks: marksValue,
         grade: form.grade.trim() || null,
-        comments: form.comments.trim() || null,
       };
 
       const response = await apiClient.post(endpoints.results.upsert, { body: payload });
@@ -280,7 +279,6 @@ function ResultsPage() {
         ...current,
         marks: '',
         grade: '',
-        comments: '',
       }));
     } catch (err) {
       setFeedback({
@@ -421,9 +419,9 @@ function ResultsPage() {
 
           <div className="lg:col-span-4 space-y-5">
             <div>
-              <h3 className="text-lg font-semibold text-slate-900">Scores & comments</h3>
+              <h3 className="text-lg font-semibold text-slate-900">Scores</h3>
               <p className="mt-1 text-sm text-slate-500">
-                Enter the marks achieved, an optional grade, and any narrative feedback.
+                Enter the marks achieved and an optional grade.
               </p>
             </div>
 
@@ -443,20 +441,7 @@ function ResultsPage() {
 
 
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-700" htmlFor="result-comments">
-                Comments
-              </label>
-              <textarea
-                id="result-comments"
-                name="comments"
-                value={form.comments}
-                onChange={handleChange}
-                rows={4}
-                placeholder="Optional feedback to help students improve"
-                className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/40"
-              />
-            </div>
+
 
             {feedback ? (
               <div

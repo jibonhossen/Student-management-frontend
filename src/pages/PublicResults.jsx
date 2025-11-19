@@ -233,7 +233,7 @@ function PublicResultsPage() {
                         <th className="px-4 py-3 font-medium">Subject</th>
                         <th className="px-4 py-3 font-medium text-right">Marks</th>
                         <th className="px-4 py-3 font-medium text-right">Grade</th>
-                        <th className="px-4 py-3 font-medium">Comments</th>
+                        <th className="px-4 py-3 font-medium text-right">Grade</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-200/80 bg-white/95">
@@ -242,9 +242,7 @@ function PublicResultsPage() {
                           <td className="px-4 py-3 font-medium text-slate-900">{result.subject}</td>
                           <td className="px-4 py-3 text-right font-semibold text-slate-900">{result.marks}</td>
                           <td className="px-4 py-3 text-right">{result.grade ?? '—'}</td>
-                          <td className="px-4 py-3 text-sm text-slate-500">
-                            {result.comments ?? '—'}
-                          </td>
+                          <td className="px-4 py-3 text-right">{result.grade ?? '—'}</td>
                         </tr>
                       ))}
                     </tbody>
