@@ -441,7 +441,7 @@ function ResultsPage() {
               />
             </div>
 
-     
+
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-slate-700" htmlFor="result-comments">
@@ -514,7 +514,7 @@ function ResultsPage() {
                 description="Record marks to populate the gradebook."
               />
             ) : (
-              <div className="overflow-hidden rounded-xl border border-slate-200/70">
+              <div className="overflow-x-auto rounded-xl border border-slate-200/70">
                 <table className="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-700">
                   <thead className="bg-slate-50/80 text-xs uppercase text-slate-500">
                     <tr>
@@ -535,9 +535,9 @@ function ResultsPage() {
                         <td className="px-4 py-3 text-sm text-slate-500">
                           {result.updated_at
                             ? new Intl.DateTimeFormat('en', {
-                                dateStyle: 'medium',
-                                timeStyle: 'short',
-                              }).format(new Date(result.updated_at))
+                              dateStyle: 'medium',
+                              timeStyle: 'short',
+                            }).format(new Date(result.updated_at))
                             : '—'}
                         </td>
                       </tr>

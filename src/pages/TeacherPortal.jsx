@@ -15,6 +15,7 @@ const RESULT_INITIAL = {
   class_id: '',
   subject_id: '',
   student_id: '',
+  roll_number: '',
   exam_id: '',
   marks: '',
   comments: '',
@@ -109,6 +110,7 @@ function TeacherPortalPage() {
         subject_id: subjectsMap[initialClassId]?.[0]?.id ?? '',
         exam_id: '',
         student_id: '',
+        roll_number: '',
         marks: '',
         comments: '',
       }));
@@ -230,14 +232,26 @@ function TeacherPortalPage() {
       setResultFeedback({ type: 'error', message: 'Login first to submit results.' });
       return;
     }
-    if (!form.class_id || !form.exam_id || !form.subject_id || !form.student_id) {
-      setResultFeedback({ type: 'error', message: 'Class, exam, subject, and student are required.' });
+    if (!form.class_id || !form.exam_id || !form.subject_id) {
+      setResultFeedback({ type: 'error', message: 'Class, exam, and subject are required.' });
+      return;
+    }
+    if (!form.roll_number) {
+      setResultFeedback({ type: 'error', message: 'Student roll number is required.' });
       return;
     }
     if (form.marks === '') {
       setResultFeedback({ type: 'error', message: 'Provide the marks obtained.' });
       return;
     }
+
+    // Find student by roll number
+    const student = students.find(s => s.roll_number === form.roll_number);
+    if (!student) {
+      setResultFeedback({ type: 'error', message: `No student found with roll number "${form.roll_number}" in this class.` });
+      return;
+    }
+
     const marksValue = Number(form.marks);
     if (Number.isNaN(marksValue)) {
       setResultFeedback({ type: 'error', message: 'Marks must be a number.' });
@@ -248,7 +262,7 @@ function TeacherPortalPage() {
       setIsSubmitting(true);
       setResultFeedback(null);
       const payload = {
-        student_id: form.student_id,
+        student_id: student.id,
         exam_id: form.exam_id,
         subject_id: form.subject_id,
         marks: marksValue,
@@ -263,6 +277,7 @@ function TeacherPortalPage() {
       });
       setForm(current => ({
         ...current,
+        roll_number: '',
         marks: '',
         comments: '',
       }));
@@ -449,23 +464,17 @@ function TeacherPortalPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700" htmlFor="portal-student">
-                    Student<span className="text-rose-500">*</span>
+                  <label className="text-sm font-medium text-slate-700" htmlFor="portal-roll">
+                    Roll Number<span className="text-rose-500">*</span>
                   </label>
-                  <select
-                    id="portal-student"
-                    name="student_id"
-                    value={form.student_id}
+                  <input
+                    id="portal-roll"
+                    name="roll_number"
+                    value={form.roll_number || ''}
                     onChange={handleResultChange}
-                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/40"
-                  >
-                    <option value="">Select student</option>
-                    {students.map(student => (
-                      <option key={student.id} value={student.id}>
-                        {student.roll_number} — {student.name}
-                      </option>
-                    ))}
-                  </select>
+                    placeholder="e.g., 101"
+                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/40"
+                  />
                 </div>
               </div>
 
@@ -484,20 +493,7 @@ function TeacherPortalPage() {
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-slate-700" htmlFor="portal-comments">
-                    Comments
-                  </label>
-                  <textarea
-                    id="portal-comments"
-                    name="comments"
-                    value={form.comments}
-                    onChange={handleResultChange}
-                    rows={3}
-                    placeholder="Optional feedback"
-                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/40"
-                  />
-                </div>
+              
               </div>
 
               {resultFeedback ? (
@@ -519,6 +515,7 @@ function TeacherPortalPage() {
                   onClick={() =>
                     setForm(current => ({
                       ...current,
+                      roll_number: '',
                       marks: '',
                       comments: '',
                     }))
