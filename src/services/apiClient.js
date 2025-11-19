@@ -1,5 +1,5 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const API_PREFIX = '/api/v1/sms';
+const API_PREFIX = '/api/v1';
 const API_GET_PREFIX = `${API_PREFIX}/get`;
 const API_POST_PREFIX = `${API_PREFIX}/post`;
 
@@ -136,8 +136,8 @@ export const endpoints = {
     create: `${API_POST_PREFIX}/add-teacher-assignment`,
   },
   teacher: {
-    classes: `${API_GET_PREFIX}/classes-assigned-to-teacher`,
-    subjects: `${API_GET_PREFIX}/subjects-of-a-teacher`,
+    classes: `${API_GET_PREFIX}/catt`,
+    subjects: `${API_GET_PREFIX}/soat`,
     students: `${API_GET_PREFIX}/students-of-a-class`,
   },
   results: {
